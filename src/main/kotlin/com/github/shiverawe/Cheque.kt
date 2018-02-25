@@ -1,3 +1,5 @@
+package com.github.shiverawe
+
 data class Cheque
 (
         val cashTotalSum: Number? = null,
