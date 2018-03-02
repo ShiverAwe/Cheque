@@ -9,8 +9,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import javax.xml.bind.DatatypeConverter
 import java.io.InputStreamReader
-import com.sun.xml.internal.ws.streaming.XMLStreamReaderUtil.close
-import com.sun.xml.internal.ws.streaming.XMLStreamWriterUtil.getOutputStream
 import java.io.BufferedReader
 import java.io.OutputStreamWriter
 
@@ -72,24 +70,22 @@ private fun nalogruUrl(fn: String, fd: String, fs: String): String {
     conn.doOutput = true
     conn.requestMethod = "POST"
 
-    val username = "89992002118"
+    val username = "+79992002118"
     val pass = "926046"
     val credentials = "${username}:${pass}"
-    val basicAuth = "Basic " + DatatypeConverter
+
+    val authtoken = "Basic " + DatatypeConverter
             .printBase64Binary(credentials.toByteArray())
-    conn.setRequestProperty("Authorization", basicAuth)
+    println(authtoken)
 
-    val derviceId = ""
-    val deviceOS = "Android 4.4.4"
-    val protocol = "2"
-    val clientVersion = "1.4.1.3"
-    val userAgent = "okhttp/3.0.1"
-
-    conn.setRequestProperty("Device-Id", derviceId)
-    conn.setRequestProperty("Device-OS", deviceOS)
-    conn.setRequestProperty("Version", protocol)
-    conn.setRequestProperty("ClientVersion", clientVersion)
-    conn.setRequestProperty("UserAgent", userAgent)
+    conn.setRequestProperty("Device-Id", "")
+    conn.setRequestProperty("Accept-Encoding", "gzip")
+    conn.setRequestProperty("Connection", "Keep-Alive")
+    conn.setRequestProperty("Device-OS", "Android 5.1")
+    conn.setRequestProperty("Version", "2")
+    conn.setRequestProperty("ClientVersion", "1.4.4.1")
+    conn.setRequestProperty("UserAgent", "okhttp/3.0.1")
+    conn.setRequestProperty("Authorization", authtoken)
 
     val data = """{"format":"json","pattern":"#"}"""
 
@@ -98,8 +94,8 @@ private fun nalogruUrl(fn: String, fd: String, fs: String): String {
     out.write(data)
     out.close()
 
-    val inp = BufferedReader(InputStreamReader(conn.inputStream))
-    print(inp.lines())
+    val inp = conn.inputStream.bufferedReader().lines()
+    print(inp)
 
     return ""
 }
