@@ -1,5 +1,7 @@
 package com.github.shiverawe.bobbyboy
 
+import com.github.shiverawe.bobbyboy.*
+
 // создаём необходимые директории если отсутствуют
 fun init() {
     if (!os.path.exists(config.receipt_dir))
@@ -32,7 +34,7 @@ fun recognize(resend, receipt_text) {
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
     var parser
     parser = argparse.ArgumentParser(description = 'Import receipts data from OFD to Drebedengi')
     parser.add_argument('--text', help = 'take receipt data from string')
