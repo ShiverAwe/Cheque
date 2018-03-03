@@ -33,9 +33,21 @@ data class ChequeData(
         /**
          * Номер смены
          */
-        val smena: String = "315",
+        val shiftNumber: String = "315",
         /**
          * Номер чека в смене
          */
-        val docNumb: String = "411"
-) {}
+        val shiftDocNumber: String = "411",
+        /**
+         * Сумма чека.
+         * 123 рубля 45 коп. -> 12345.
+         * 17 рублей 00 коп. -> 1700.
+         */
+        val summary: Int = 178156,
+        /**
+         * Дата и время чека.
+         * Формат гггг-мм-ддTчч:мм:сс
+         * Если секунды не указаны - укажите :00
+         */
+        val date: String = "2018-02-23T23:45:00"
+)
