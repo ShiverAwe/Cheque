@@ -5,6 +5,7 @@ import com.github.shiverawe.ChequeSamples
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.stream.Collectors
 
 object OfdRu {
     val host = "https://ofd.ru"
@@ -12,10 +13,25 @@ object OfdRu {
     val password = "ykkyzt4Vm5rY"
 }
 
-fun main(args: Array<String>) {
-    val url = ofdRuIntegrationUrl(ChequeSamples.sample1)
+fun executePost(url: String, body: String = ""): List<String> {
     val obj = URL(url)
     val conn = obj.openConnection() as HttpURLConnection
+    conn.doOutput = true
+    val out = OutputStreamWriter(conn.outputStream)
+    out.write(body)
+    out.close()
+    val input = conn.inputStream.bufferedReader()
+    val response = input.lines().collect(Collectors.toList())
+    input.close()
+    return response
+}
+
+fun main(args: Array<String>) {
+    val url = ofdRuIntegrationUrl1(ChequeSamples.sample1)
+    println(url)
+    val response = executePost(url)
+    print(response)
+
 }
 
 /**
@@ -23,15 +39,15 @@ fun main(args: Array<String>) {
  * Формирование прямой ссылки на электронный чек
  */
 private fun ofdRuRecUrl(cc: ChequeCredentials): String {
-    return """"${OfdRu.host}rec/${cc.inn}/${cc.kkt}/${cc.fn}/${cc.shiftDocNumber}/${cc.fp}"""
+    return """"${OfdRu.host}/rec/${cc.inn}/${cc.kkt}/${cc.fn}/${cc.shiftDocNumber}/${cc.fp}"""
 }
 
 private fun ofdRuIntegrationUrl(cc: ChequeCredentials): String {
-    return """${OfdRu.host}api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/receipt/${cc.fd}"""
+    return """${OfdRu.host}/api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/receipt/${cc.fd}"""
 }
 
 private fun ofdRuIntegrationUrl1(cc: ChequeCredentials): String {
-    return """${OfdRu.host}api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/zreport/${cc.shiftNumber}/receipt/${cc.shiftDocNumber}"""
+    return """${OfdRu.host}/api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/zreport/${cc.shiftNumber}/receipt/${cc.shiftDocNumber}"""
 }
 
 /**
