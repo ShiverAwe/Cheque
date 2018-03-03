@@ -18,12 +18,6 @@ private val DEFAULT_USER_AGENT = "" +
         "Safari/537.36"
 
 fun main(args: Array<String>) {
-    val ckeck = ChequeCredentials()
-
-
-    //nalogruUrl(FN, FD, FP)
-    //print(ofdRuRecUrl(INN, KKT, FN, docNumb, FP))
-    //print(getUrl("https://ofd.ru/api/integration/v1/inn/7728029110/kkt/0000113865043432/zreport/315/receipt/411"))
 }
 
 private fun getUrl(uri: String): String {

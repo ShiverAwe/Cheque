@@ -1,18 +1,19 @@
 package com.github.shiverawe.ofdru
 
 import com.github.shiverawe.ChequeCredentials
+import com.github.shiverawe.ChequeSamples
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 
-object OfdRu{
+object OfdRu {
     val host = "https://ofd.ru"
     val login = "vs3x3@mail.ru"
     val password = "ykkyzt4Vm5rY"
 }
 
 fun main(args: Array<String>) {
-    val url = ofdRuIntegrationUrl(ChequeCredentials())
+    val url = ofdRuIntegrationUrl(ChequeSamples.sample1)
     val obj = URL(url)
     val conn = obj.openConnection() as HttpURLConnection
 }
@@ -25,11 +26,11 @@ private fun ofdRuRecUrl(cc: ChequeCredentials): String {
     return """"${OfdRu.host}rec/${cc.inn}/${cc.kkt}/${cc.fn}/${cc.shiftDocNumber}/${cc.fp}"""
 }
 
-private fun ofdRuIntegrationUrl(cc: ChequeCredentials): String{
+private fun ofdRuIntegrationUrl(cc: ChequeCredentials): String {
     return """${OfdRu.host}api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/receipt/${cc.fd}"""
 }
 
-private fun ofdRuIntegrationUrl1(cc: ChequeCredentials): String{
+private fun ofdRuIntegrationUrl1(cc: ChequeCredentials): String {
     return """${OfdRu.host}api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/zreport/${cc.shiftNumber}/receipt/${cc.shiftDocNumber}"""
 }
 
@@ -37,7 +38,7 @@ private fun ofdRuIntegrationUrl1(cc: ChequeCredentials): String{
  * This method allows to get access token for private organization requests
  * Авторизация через AuthToken
  */
-private fun ofdRuAuthUrl(){
+private fun ofdRuAuthUrl() {
     val url = """${OfdRu.host}/api/Authorization/CreateAuthToken"""
     val obj = URL(url)
     val conn = obj.openConnection() as HttpURLConnection
