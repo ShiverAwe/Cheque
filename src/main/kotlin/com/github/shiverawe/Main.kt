@@ -20,16 +20,10 @@ private val DEFAULT_USER_AGENT = "" +
         "Safari/537.36"
 
 fun main(args: Array<String>) {
-    val INN = "7728029110"
-    val KKT = "0000113865043432"
-    val FN = "8710000100257633"
-    val FD = "108885"
-    val FP = "1924949121"
-    val SMENA = "315"
-    val docNumb = "411"
+    val ckeck = ChequeData()
 
 
-    nalogruUrl(FN, FD, FP)
+    //nalogruUrl(FN, FD, FP)
     //print(ofdruUrl(INN, KKT, FN, docNumb, FP))
     //print(getUrl("https://ofd.ru/api/integration/v1/inn/7728029110/kkt/0000113865043432/zreport/315/receipt/411"))
 }
@@ -56,12 +50,7 @@ private fun getAuth(login: String, password: String): String {
     }
 }
 
-private fun ofdruUrl(inn: String, kkt: String, fn: String, docNumb: String, fpd: String): String {
-    return "https://ofd.ru/rec/${inn}/${kkt}/${fn}/${docNumb}/${fpd}"
-}
-
 private fun nalogruUrl(fn: String, fd: String, fs: String): String {
-
     val api = "https://proverkacheka.nalog.ru:9999"
     val url = """${api}/v1/inns/*/kkts/*/fss/${fn}/tickets/${fd}?fiscalSign=${fs}&sendToEmail=no"""
     val obj = URL(url)
