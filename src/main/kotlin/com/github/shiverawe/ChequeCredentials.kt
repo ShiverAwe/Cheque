@@ -1,6 +1,6 @@
 package com.github.shiverawe
 
-data class ChequeData(
+data class ChequeCredentials(
         /**
          * 10 chars number
          * Число из 10 знаков
@@ -21,6 +21,7 @@ data class ChequeData(
          */
         val fn: String = "8710000100257633",
         /**
+         * RawID
          * ФД - Номер фискального документа
          * Число из 6 знаков
          */

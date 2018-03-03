@@ -8,8 +8,6 @@ import org.apache.http.client.methods.HttpGet
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.xml.bind.DatatypeConverter
-import java.io.InputStreamReader
-import java.io.BufferedReader
 import java.io.OutputStreamWriter
 
 
@@ -20,11 +18,11 @@ private val DEFAULT_USER_AGENT = "" +
         "Safari/537.36"
 
 fun main(args: Array<String>) {
-    val ckeck = ChequeData()
+    val ckeck = ChequeCredentials()
 
 
     //nalogruUrl(FN, FD, FP)
-    //print(ofdruUrl(INN, KKT, FN, docNumb, FP))
+    //print(ofdRuRecUrl(INN, KKT, FN, docNumb, FP))
     //print(getUrl("https://ofd.ru/api/integration/v1/inn/7728029110/kkt/0000113865043432/zreport/315/receipt/411"))
 }
 
