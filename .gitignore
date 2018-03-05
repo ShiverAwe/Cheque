@@ -3,6 +3,7 @@
 /target
 /out
 /.gradle
+/gradle
 
 gradlew
 gradlew.bat
