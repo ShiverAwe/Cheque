@@ -10,9 +10,6 @@ object Requests{
     }
 
     fun ofdRu(cc: ChequeCredentials):String {
-        return """"https://ofd.ru/api/rawdoc/RecipeInfo?Fn=${cc.fn}&Kkt=${cc.kkt}&Inn=${cc.inn}&Num=${cc.shiftNumber}&Sign=${cc.shiftDocNumber}"""
+        return """https://ofd.ru/api/rawdoc/RecipeInfo?Fn=${cc.fn}&Kkt=${cc.kkt}&Inn=${cc.inn}&Num=${cc.fd}&Sign=${cc.fp}"""
     }
-
-
-
 }
