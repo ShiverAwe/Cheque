@@ -12,4 +12,7 @@ object ChequeSamples {
             summary = 178156,
             date = "2018-02-23T23:45:00"
     )
+
+    var text = "hello"
 }
+
