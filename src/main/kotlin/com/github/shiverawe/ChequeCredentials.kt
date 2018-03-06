@@ -3,6 +3,7 @@ package com.github.shiverawe
 data class ChequeCredentials(
         /**
          * 10 chars number
+         * ИНН
          * Число из 10 знаков
          */
         val inn: String = "",
