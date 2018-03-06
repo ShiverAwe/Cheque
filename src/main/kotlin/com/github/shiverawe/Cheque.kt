@@ -1,5 +1,9 @@
 package com.github.shiverawe
 
+/**
+ * Класс, хранящий исключительную информацию о чеке
+ * Возвращаемый JSON может быть разпознан этой структурой
+ */
 data class Cheque
 (
         val cashTotalSum: Number? = null,
