@@ -10,7 +10,7 @@ data class ChequeCredentials(
         /**
          * Сash-desk registration number
          * 16 chars number
-         *
+         * Регистрационный номер кассы
          * Число из 16 знаков
          */
         val kkt: String = "",
