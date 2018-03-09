@@ -52,13 +52,18 @@ interface OfdReceiver {
         val conn = obj.openConnection() as HttpURLConnection
         conn.doOutput = true
 
-        OutputStreamWriter(conn.outputStream).use {
-            it.write(body)
+        conn.outputStream.use {
+            OutputStreamWriter(it).use {
+                it.write(body)
+            }
         }
 
-        val response: Optional<String> = conn.inputStream.bufferedReader().use {
-            it.lines().reduce(String::plus)
-        }
-        return response.orElse("")
+        val response = conn.inputStream.use{
+            it. bufferedReader().use {
+                it.lines().reduce(String::plus)
+            }
+        }.orElse("")
+
+        return response
     }
 }
