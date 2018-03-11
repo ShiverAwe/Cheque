@@ -16,7 +16,6 @@ object Requests {
         override fun url(cc: ChequeCredentials): String {
             return """https://lk.platformaofd.ru/web/noauth/cheque?fn=${cc.fn}&fp=${cc.fp}"""
         }
-
     }
 
     object ofdRu : OfdReceiver {
@@ -47,7 +46,7 @@ interface OfdReceiver {
         return executePost(url(cc))
     }
 
-    fun executePost(url: String, body: String = ""): String {
+    private fun executePost(url: String, body: String = ""): String {
         val obj = URL(url)
         val conn = obj.openConnection() as HttpURLConnection
         conn.doOutput = true
@@ -58,8 +57,8 @@ interface OfdReceiver {
             }
         }
 
-        val response = conn.inputStream.use{
-            it. bufferedReader().use {
+        val response = conn.inputStream.use {
+            it.bufferedReader().use {
                 it.lines().reduce(String::plus)
             }
         }.orElse("")
