@@ -1,18 +1,18 @@
 package com.github.shiverawe
 
-import org.apache.http.client.methods.*;
-import org.apache.commons.io.*;
-
-import org.apache.http.impl.client.HttpClients
+import org.apache.commons.io.IOUtils
 import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.HttpClients
+import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.xml.bind.DatatypeConverter
-import java.io.OutputStreamWriter
 
 object NalogRu {
 
-
+    val api = "https://proverkacheka.nalog.ru:9999"
+    val username = "+79992002118"
+    val pass = "926046"
 
     private val DEFAULT_USER_AGENT = "" +
             "Mozilla/5.0 (X11; Linux x86_64) " +
@@ -31,23 +31,20 @@ object NalogRu {
         }
     }
 
-    private fun url(fn: String, fd: String, fs: String): String {
-        val api = "https://proverkacheka.nalog.ru:9999"
-        val url = """${api}/v1/inns/*/kkts/*/fss/${fn}/tickets/${fd}?fiscalSign=${fs}&sendToEmail=no"""
+    private fun url(cc: ChequeCredentials): String {
+        val url = """${api}/v1/inns/*/kkts/*/fss/${cc.fn}/tickets/${cc.fd}?fiscalSign=${cc.fp}&sendToEmail=no"""
         val obj = URL(url)
         val conn = obj.openConnection() as HttpURLConnection
-        conn.setRequestProperty("Content-Type", "application/json")
         conn.doOutput = true
         conn.requestMethod = "POST"
 
-        val username = "+79992002118"
-        val pass = "926046"
         val credentials = "${username}:${pass}"
 
         val authtoken = "Basic " + DatatypeConverter
                 .printBase64Binary(credentials.toByteArray())
         println(authtoken)
 
+        conn.setRequestProperty("Content-Type", "application/json")
         conn.setRequestProperty("Device-Id", "")
         conn.setRequestProperty("Accept-Encoding", "gzip")
         conn.setRequestProperty("Connection", "Keep-Alive")
@@ -59,15 +56,21 @@ object NalogRu {
 
         val data = """{"format":"json","pattern":"#"}"""
 
+        conn.outputStream.use {
+            OutputStreamWriter(it).use {
+                it.write(data)
+            }
+        }
 
-        val out = OutputStreamWriter(conn.outputStream)
-        out.write(data)
-        out.close()
+        val response = conn.inputStream.use{
+            it.bufferedReader().use {
+                it.lines()
+            }
+        }
 
-        val inp = conn.inputStream.bufferedReader().lines()
-        print(inp)
+        print(response)
 
-        return ""
+        return response.toString()
     }
 
 }
