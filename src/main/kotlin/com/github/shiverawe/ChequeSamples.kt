@@ -12,4 +12,18 @@ object ChequeSamples {
             summary = 178156,
             date = "2018-02-23T23:45:00"
     )
+
+
+    val taxcomSample = ChequeCredentials(
+            inn = "???",
+            kkt = "???",
+            fn = "???",
+            fd = "???",
+            fp = "0808855891",
+            shiftNumber = "???",
+            shiftDocNumber = "???",
+            summary = 61100 / 100, // Для такскома не нужны копейки
+            date = "???"
+    )
+
 }
