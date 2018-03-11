@@ -12,13 +12,15 @@ import java.io.OutputStreamWriter
 
 object NalogRu {
 
+
+
     private val DEFAULT_USER_AGENT = "" +
             "Mozilla/5.0 (X11; Linux x86_64) " +
             "AppleWebKit/537.36 (KHTML, like Gecko) " +
             "Chrome/33.0.1750.152 " +
             "Safari/537.36"
 
-    private fun getUrl(uri: String): String {
+    private fun executeGet(uri: String): String {
         val req = HttpGet(uri)
         req.setHeader("User-Agent", DEFAULT_USER_AGENT)
         HttpClients.createDefault().use { client ->
@@ -29,18 +31,7 @@ object NalogRu {
         }
     }
 
-    private fun getAuth(login: String, password: String): String {
-        val req = HttpPost("https://ofd.ru/api/Authorization/CreateAuthToken")
-        val body = """{"Login": "${login}","Password": "${password}"}"""
-        HttpClients.createDefault().use { client ->
-            client.execute(req).use { response ->
-                val inputStream = response.entity.content
-                return IOUtils.toString(inputStream)
-            }
-        }
-    }
-
-    private fun nalogruUrl(fn: String, fd: String, fs: String): String {
+    private fun url(fn: String, fd: String, fs: String): String {
         val api = "https://proverkacheka.nalog.ru:9999"
         val url = """${api}/v1/inns/*/kkts/*/fss/${fn}/tickets/${fd}?fiscalSign=${fs}&sendToEmail=no"""
         val obj = URL(url)
