@@ -3,7 +3,6 @@ package com.github.shiverawe
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 
 object Requests {
     object taxcom : OfdReceiver {
@@ -22,6 +21,29 @@ object Requests {
         override fun url(cc: ChequeCredentials): String {
             return """https://ofd.ru/api/rawdoc/RecipeInfo?Fn=${cc.fn}&Kkt=${cc.kkt}&Inn=${cc.inn}&Num=${cc.fd}&Sign=${cc.fp}"""
         }
+
+        object OfdRu {
+            val host = "https://ofd.ru"
+            val login = "vs3x3@mail.ru"
+            val password = "ykkyzt4Vm5rY"
+        }
+
+        /**
+         * This method returns URL, which returns direct link to cheque data
+         * Формирование прямой ссылки на электронный чек
+         */
+        private fun ofdRuRecUrl(cc: ChequeCredentials): String {
+            return """"${OfdRu.host}/rec/${cc.inn}/${cc.kkt}/${cc.fn}/${cc.shiftDocNumber}/${cc.fp}"""
+        }
+
+        private fun ofdRuIntegrationUrl(cc: ChequeCredentials): String {
+            return """${OfdRu.host}/api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/receipt/${cc.fd}"""
+        }
+
+        private fun ofdRuIntegrationUrl1(cc: ChequeCredentials): String {
+            return """${OfdRu.host}/api/integration/v1/inn/${cc.inn}/kkt/${cc.kkt}/zreport/${cc.shiftNumber}/receipt/${cc.shiftDocNumber}"""
+        }
+
     }
 
     object ofdYa : OfdReceiver {
