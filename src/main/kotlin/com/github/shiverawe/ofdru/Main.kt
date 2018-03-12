@@ -17,12 +17,16 @@ fun executePost(url: String, body: String = ""): List<String> {
     val obj = URL(url)
     val conn = obj.openConnection() as HttpURLConnection
     conn.doOutput = true
-    val out = OutputStreamWriter(conn.outputStream)
-    out.write(body)
-    out.close()
-    val input = conn.inputStream.bufferedReader()
-    val response = input.lines().collect(Collectors.toList())
-    input.close()
+    conn.outputStream.use {
+        OutputStreamWriter(it).use {
+            it.write(body)
+        }
+    }
+    val response: List<String> = conn.inputStream.use {
+        it.bufferedReader().use {
+            it.lines().collect(Collectors.toList())
+        }
+    }
     return response
 }
 
@@ -31,7 +35,6 @@ fun main(args: Array<String>) {
     println(url)
     val response = executePost(url)
     print(response)
-
 }
 
 /**
