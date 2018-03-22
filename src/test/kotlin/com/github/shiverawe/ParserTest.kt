@@ -4,6 +4,9 @@ import org.junit.Test
 
 class ParserTest {
 
+    /**
+     * Etot test ostavlyaet v input tolko bukvy (vrode kak)
+     */
     @Test
     fun main() {
         val input = "kat123ya56hello";
