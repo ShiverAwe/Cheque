@@ -31,7 +31,7 @@ object NalogRu {
         }
     }
 
-    private fun url(cc: ChequeCredentials): String {
+    fun url(cc: ChequeCredentials): String {
         val url = """${api}/v1/inns/*/kkts/*/fss/${cc.fn}/tickets/${cc.fd}?fiscalSign=${cc.fp}&sendToEmail=no"""
         val obj = URL(url)
         val conn = obj.openConnection() as HttpURLConnection
@@ -42,7 +42,7 @@ object NalogRu {
 
         val authtoken = "Basic " + DatatypeConverter
                 .printBase64Binary(credentials.toByteArray())
-        println(authtoken)
+        //println(authtoken)
 
         conn.setRequestProperty("Content-Type", "application/json")
         conn.setRequestProperty("Device-Id", "")
@@ -62,7 +62,7 @@ object NalogRu {
             }
         }
 
-        val response = conn.inputStream.use{
+        val response = conn.inputStream.use {
             it.bufferedReader().use {
                 it.lines()
             }
