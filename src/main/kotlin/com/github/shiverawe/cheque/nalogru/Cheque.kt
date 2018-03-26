@@ -1,4 +1,4 @@
-package com.github.shiverawe.cheque
+package com.github.shiverawe.cheque.nalogru
 
 /**
  * Класс, хранящий исключительную информацию о чеке
