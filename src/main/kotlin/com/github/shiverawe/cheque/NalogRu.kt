@@ -1,4 +1,4 @@
-package com.github.shiverawe
+package com.github.shiverawe.cheque
 
 import org.apache.commons.io.IOUtils
 import org.apache.http.client.methods.HttpGet

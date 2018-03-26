@@ -1,4 +1,4 @@
-package com.github.shiverawe
+package com.github.shiverawe.cheque
 
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection

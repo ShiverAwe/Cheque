@@ -1,4 +1,4 @@
-package com.github.shiverawe
+package com.github.shiverawe.cheque
 
 object ChequeSamples {
     val sample1 = ChequeCredentials(
