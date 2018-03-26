@@ -12,8 +12,6 @@ import javax.xml.bind.DatatypeConverter
 object NalogRu {
 
     val api = "https://proverkacheka.nalog.ru:9999"
-    val username = "+79992002118"
-    val pass = "926046"
 
     private val DEFAULT_USER_AGENT = "" +
             "Mozilla/5.0 (X11; Linux x86_64) " +
@@ -39,7 +37,7 @@ object NalogRu {
         conn.doOutput = true
         conn.requestMethod = "POST"
 
-        val credentials = "${username}:${pass}"
+        val credentials = "${Credentials.username}:${Credentials.pass}"
 
         val authtoken = "Basic " + DatatypeConverter
                 .printBase64Binary(credentials.toByteArray())

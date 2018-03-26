@@ -7,3 +7,6 @@
 
 gradlew
 gradlew.bat
+
+# Secret properties file
+secret.properties
