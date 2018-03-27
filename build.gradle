@@ -20,6 +20,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
+    maven { url "https://dl.bintray.com/kotlin/exposed" } // for kotlin exposed only not jcenter() here.
 }
 
 dependencies {
@@ -44,6 +45,9 @@ dependencies {
     compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
     // https://mvnrepository.com/artifact/com.h2database/h2
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
+    // https://mvnrepository.com/artifact/org.jetbrains.exposed/exposed
+    compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
+
 
 }
 
