@@ -22,8 +22,12 @@ class Parser {
      * This meths search for occurrences in list `registeredItems` or returns "unknown"
      */
     fun findItem(s: String): String{
-        if (registeredItems.contains(s)) return s;
+        if (registeredItems.contains(s)) return s
         else return "unknown"
+    }
+
+    fun getCategoryFor(item: String): String{
+        throw UnsupportedOperationException("Not implemented yet.")
     }
 
 }
