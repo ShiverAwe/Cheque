@@ -10,3 +10,6 @@ gradlew.bat
 
 # Secret properties file
 secret.properties
+
+# Database error log
+*.trace.db
