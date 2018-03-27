@@ -1,5 +1,6 @@
-package com.github.shiverawe
+package com.github.shiverawe.cheque.categories
 
+import com.github.shiverawe.cheque.categories.Parser
 import org.junit.Test
 
 class ParserTest {

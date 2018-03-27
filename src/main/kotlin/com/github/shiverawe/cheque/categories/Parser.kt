@@ -1,4 +1,4 @@
-package com.github.shiverawe
+package com.github.shiverawe.cheque.categories
 
 import java.util.*
 
