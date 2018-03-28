@@ -76,6 +76,7 @@ def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-fp', type=int, help='фискальная подпись документа')
     parser.add_argument('-s', help='итоговая сумма чека')
+    parser.add_argument('output', nargs='?')
     return parser
 
 
@@ -86,5 +87,6 @@ if __name__ == "__main__":
         tx = Taxcom(fiscal_id=namespace.fp, raw_sum=namespace.s)
         if tx.search():
             items = tx.get_items()
-            json1 = json.dumps(dict(items), ensure_ascii=False)
-            sys.stdout.write(json1)
+            json1 = json.dumps(dict(items), ensure_ascii=False, indent=4, separators=(',', ': '))
+            output = open(namespace.output, 'w') if namespace.output else sys.stdout
+            print >>output, json1
