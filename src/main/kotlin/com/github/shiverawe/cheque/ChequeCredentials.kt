@@ -14,6 +14,7 @@ data class ChequeCredentials(
          * Число из 16 знаков
          */
         val kkt: String = "",
+        val ofd: String = "",
         /**
          * fnnumber
          * 16 chars number
