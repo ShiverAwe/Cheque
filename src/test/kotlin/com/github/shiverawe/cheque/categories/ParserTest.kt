@@ -10,15 +10,15 @@ class ParserTest {
      */
     @Test
     fun main() {
-        val input = "kat123ya56hello";
-        val parser = Parser();
+        val input = "kat123ya56hello"
+        val parser = Parser()
         val output = parser.parseItem(input)
-        println(output);
+        println(output)
         assert(output == "katyahello")
     }
 
     @Test
-    fun checkThatItemIsFound(){
+    fun checkThatItemIsFound() {
 
     }
 
