@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 
 class Taxcom:
     url_receipt_get = "https://receipt.taxcom.ru/v01/show?fp={}&s={}"
+    errors = []
 
     def __init__(self, fiscal_id, raw_sum):
         self.fiscal_id = fiscal_id
@@ -20,11 +21,10 @@ class Taxcom:
         return data['fiscal_id'] and not data['kkt']
 
     def search(self):
-        print("Search in Taxcom...")
         request = requests.get(self.url_receipt_get.format(
             self.fiscal_id, self.raw_sum))
         if "Такой чек не найден" in request.content:
-            print("Not found!")
+            self.errors.append("Check not found!")
             return False
         else:
             self.receipt_data = request.content
@@ -59,32 +59,37 @@ class Taxcom:
                 else:
                     items.append((name, "-{0:.2f}".format(summa)))
 
-            print("Items total sum: {}".format(self.total_sum))
             self.total_sum = "{0:.2f}".format(self.total_sum)
             if self.total_sum != self.raw_sum:
-                print("WARNING! Manually calculated sum {} is not equal to the receipt sum {}!".format(
+                self.errors.append("WARNING! Manually calculated sum {} is not equal to the receipt sum {}!".format(
                     self.total_sum, self.raw_sum))
 
             self.items = items
             return items
         else:
-            print("No receipt data!")
+            self.errors.append("No receipt data!")
             return False
 
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-fp', type=int, help='фискальная подпись документа')
-    parser.add_argument('-s', help='итоговая сумма чека')
+    parser.add_argument('-fp', required=True, type=int, help='фискальная подпись документа')
+    parser.add_argument('-s', required=True, help='итоговая сумма чека')
+    parser.add_argument('output', nargs='?')
     return parser
 
 
 if __name__ == "__main__":
     parser = create_parser()
     namespace = parser.parse_args()
-    if namespace.fp and namespace.s:
-        tx = Taxcom(fiscal_id=namespace.fp, raw_sum=namespace.s)
-        if tx.search():
-            items = tx.get_items()
-            json1 = json.dumps(dict(items), ensure_ascii=False)
-            sys.stdout.write(json1)
+    tx = Taxcom(fiscal_id=namespace.fp, raw_sum=namespace.s)
+
+    result = dict()
+    if tx.search():
+        result['items'] = tx.get_items()
+    if tx.errors:
+        result['error_message'] = tx.errors
+
+    json1 = json.dumps(result, ensure_ascii=False, indent=4, separators=(',', ': '))
+    output = open(namespace.output, 'w') if namespace.output else sys.stdout
+    print >>output, json1
