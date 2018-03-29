@@ -3,7 +3,7 @@ buildscript {
 
     repositories {
         mavenCentral()
-        dependencies{
+        dependencies {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         }
     }
@@ -20,7 +20,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
-    maven { url "https://dl.bintray.com/kotlin/exposed" } // for kotlin exposed only not jcenter() here.
+//    maven { url "https://dl.bintray.com/kotlin/exposed" } // for kotlin exposed only not jcenter() here.
 }
 
 dependencies {
@@ -40,7 +40,7 @@ dependencies {
     // Database
     compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
-    compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
+//    compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
     compile "org.xbib.jdbc:jdbc-driver-csv:1.2.0"
 //    compile "net.sourceforge.csvjdbc:csvjdbc:1.0.9"
     // https://mvnrepository.com/artifact/net.sourceforge.csvjdbc/csvjdbc
