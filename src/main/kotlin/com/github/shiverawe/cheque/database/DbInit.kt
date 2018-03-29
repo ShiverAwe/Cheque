@@ -16,7 +16,8 @@ object DbInit {
         dao.add(ChequeSamples.sample6)
         dao.add(ChequeSamples.sample7)
         dao.add(ChequeSamples.sample8)
-        dao.add(ChequeSamples.taxcomSample)
+        dao.add(ChequeSamples.sample9)
+        dao.add(ChequeSamples.sample10)
         println(dao.getAll().size)
     }
 }

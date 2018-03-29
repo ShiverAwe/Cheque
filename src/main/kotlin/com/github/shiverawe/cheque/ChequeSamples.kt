@@ -97,10 +97,10 @@ object ChequeSamples {
             date = "2018-01-17T00:23:00"
     )
 
-
-    val taxcomSample = ChequeCredentials(
+    val sample9 = ChequeCredentials(
             inn = "???",
             kkt = "???",
+            ofd = "taxcom.ru",
             fn = "???",
             fd = "???",
             fp = "0808855891",
@@ -108,6 +108,19 @@ object ChequeSamples {
             shiftDocNumber = "???",
             summary = 61100 / 100, // Для такскома не нужны копейки
             date = "???"
+    )
+
+    val sample10 = ChequeCredentials(
+            inn = "7728029110",
+            kkt = "0001050662063681",
+            ofd = "ofd-ya.ru",
+            fn = "8710000100396820",
+            fd = "95335",
+            fp = "912148762",
+            shiftNumber = "???",
+            shiftDocNumber = "122",
+            summary = 3590,
+            date = "2018-03-07T09:08:00"
     )
 
 }

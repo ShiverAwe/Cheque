@@ -7,6 +7,6 @@ class TaxcomTest {
     @Test
     fun checkThatTaxcomApiReturnsCheque(){
         val ofd: OfdReceiver = Requests.taxcom
-        println(ofd.receive(ChequeSamples.taxcomSample))
+        println(ofd.receive(ChequeSamples.sample9))
     }
 }
