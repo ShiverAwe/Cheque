@@ -2,11 +2,13 @@ package com.github.shiverawe.cheque.database
 
 import com.github.shiverawe.cheque.ChequeSamples
 import com.github.shiverawe.cheque.database.dao.ChequeDao
+import com.github.shiverawe.cheque.database.dao.ExposedChequeDao
+import com.github.shiverawe.cheque.database.dao.H2ChequeDao
 
 object DbInit {
     @JvmStatic
     fun main(args: Array<String>) {
-        val dao = ChequeDao()
+        val dao: ChequeDao = ExposedChequeDao()
         dao.createTable()
         dao.add(ChequeSamples.sample1)
         dao.add(ChequeSamples.sample2)
