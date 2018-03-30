@@ -8,6 +8,9 @@
 gradlew
 gradlew.bat
 
+src/main/python/.idea
+src/main/python/__pycache__
+
 # Secret properties file
 secret.properties
 

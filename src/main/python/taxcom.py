@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import sys
-import argparse
-import json
-
 import requests
 from bs4 import BeautifulSoup
 
 
 class Taxcom:
     url_receipt_get = "https://receipt.taxcom.ru/v01/show?fp={}&s={}"
-    errors = []
 
     def __init__(self, fiscal_id, raw_sum):
         self.fiscal_id = fiscal_id
         self.raw_sum = raw_sum
+        self.errors = []
 
     @staticmethod
     def is_suitable(data):
@@ -23,7 +17,10 @@ class Taxcom:
     def search(self):
         request = requests.get(self.url_receipt_get.format(
             self.fiscal_id, self.raw_sum))
-        if "Такой чек не найден" in request.content:
+        if request.status_code != 200:
+            self.errors.append("WARNING! {}: {}".format(request.status_code, request.reason))
+            return False
+        elif "Такой чек не найден" in request.content.decode('utf-8'):
             self.errors.append("Check not found!")
             return False
         else:
@@ -38,15 +35,15 @@ class Taxcom:
             self.total_sum = 0
 
             def extract_count(row_obj):
-                return row_obj.find_all('span')[0].get_text().encode("utf-8")
+                return row_obj.find_all('span')[0].get_text()
 
             def extract_price(row_obj):
-                return row_obj.find_all('span')[1].get_text().encode("utf-8")
+                return row_obj.find_all('span')[1].get_text()
 
             items = []
             for i, row in enumerate(rows):
 
-                name = row.get_text().strip().encode("utf-8")
+                name = row.get_text().strip()
 
                 price = float(extract_price(price_counts[i]).replace(',', '.'))
                 count = float(extract_count(price_counts[i]).replace(',', '.'))
@@ -69,27 +66,3 @@ class Taxcom:
         else:
             self.errors.append("No receipt data!")
             return False
-
-
-def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-fp', required=True, type=int, help='фискальная подпись документа')
-    parser.add_argument('-s', required=True, help='итоговая сумма чека')
-    parser.add_argument('output', nargs='?')
-    return parser
-
-
-if __name__ == "__main__":
-    parser = create_parser()
-    namespace = parser.parse_args()
-    tx = Taxcom(fiscal_id=namespace.fp, raw_sum=namespace.s)
-
-    result = dict()
-    if tx.search():
-        result['items'] = tx.get_items()
-    if tx.errors:
-        result['error_message'] = tx.errors
-
-    json1 = json.dumps(result, ensure_ascii=False, indent=4, separators=(',', ': '))
-    output = open(namespace.output, 'w') if namespace.output else sys.stdout
-    print >>output, json1
