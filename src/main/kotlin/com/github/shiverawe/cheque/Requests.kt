@@ -53,11 +53,11 @@ object Requests {
     }
 
     fun _1_ofdRu(cc: ChequeCredentials): String {
-        return ""
+        return "$cc"
         // TODO VShefer 07 03 : Investigate how to use it
-        val url_first_get = "https://consumer.1-ofd.ru/#/landing"
-        val url_receipt_get = "https://consumer.1-ofd.ru/api/tickets/ticket/{}"
-        val url_receipt_find = "https://consumer.1-ofd.ru/api/tickets/find-ticket"
+//        val url_first_get = "https://consumer.1-ofd.ru/#/landing"
+//        val url_receipt_get = "https://consumer.1-ofd.ru/api/tickets/ticket/{}"
+//        val url_receipt_find = "https://consumer.1-ofd.ru/api/tickets/find-ticket"
     }
 }
 

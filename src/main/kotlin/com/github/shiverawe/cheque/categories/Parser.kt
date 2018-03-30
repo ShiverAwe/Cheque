@@ -27,7 +27,7 @@ class Parser {
     }
 
     fun getCategoryFor(item: String): String{
-        throw UnsupportedOperationException("Not implemented yet.")
+        throw UnsupportedOperationException("Not implemented yet. ($item)")
     }
 
 }

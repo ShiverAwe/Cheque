@@ -41,10 +41,10 @@ dependencies {
     compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
     compile group: 'org.jetbrains.exposed', name: 'exposed', version: '0.10.2'
-    compile "org.xbib.jdbc:jdbc-driver-csv:1.2.0"
+//    compile "org.xbib.jdbc:jdbc-driver-csv:1.2.0"
 //    compile "net.sourceforge.csvjdbc:csvjdbc:1.0.9"
     // https://mvnrepository.com/artifact/net.sourceforge.csvjdbc/csvjdbc
-    compile group: 'net.sourceforge.csvjdbc', name: 'csvjdbc', version: '1.0.34'
+//    compile group: 'net.sourceforge.csvjdbc', name: 'csvjdbc', version: '1.0.34'
 
 
 }
