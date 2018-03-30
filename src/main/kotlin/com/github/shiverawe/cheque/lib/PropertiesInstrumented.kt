@@ -1,13 +1,11 @@
 package com.github.shiverawe.cheque.lib
 
-import java.util.*
-
 /**
  * This class provides easy way to load config from file.
  */
-open class PropertiesInstrumented(filename: String) {
+open class PropertiesInstrumented(val filename: String) {
 
-    private val properties: Properties = Properties()
+    private val properties = java.util.Properties()
 
     init {
         this.javaClass.getResourceAsStream("/$filename").use {
@@ -16,6 +14,7 @@ open class PropertiesInstrumented(filename: String) {
     }
 
     protected fun property(name: String): String {
+        if (!properties.contains(name)) throw kotlin.NoSuchElementException("File '$filename' does not contain property named '$name'")
         return properties.getProperty(name)
     }
 
