@@ -14,6 +14,10 @@ data class ChequeCredentials(
          * Число из 16 знаков
          */
         val kkt: String = "",
+        /**
+         * Название оператора фискальных данных (Провайдера)
+         * Например, taxcom.ru, 1-odf.ru, ofd-ya.ru
+         */
         val ofd: String = "",
         /**
          * fnnumber
@@ -29,7 +33,7 @@ data class ChequeCredentials(
          */
         val fd: String = "",
         /**
-         * ФП - Фискальный признак документы
+         * ФП - Фискальный признак документа
          * Число из 10 знаков
          */
         val fp: String = "",
