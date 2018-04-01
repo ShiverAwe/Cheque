@@ -6,5 +6,10 @@ interface CategoryDao {
      */
     fun getCategoryLine(name: String): List<String>
 
+    fun getCategoryList(): List<String>
+
+    fun getLeafCategories(): List<String>
+
     fun createCategory(name: String, parent: String)
+
 }
