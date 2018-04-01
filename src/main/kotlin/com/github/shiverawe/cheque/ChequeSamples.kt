@@ -1,5 +1,7 @@
 package com.github.shiverawe.cheque
 
+import com.github.shiverawe.cheque.entities.ChequeCredentials
+
 object ChequeSamples {
     val sample1 = ChequeCredentials(
             inn = "7728029110",

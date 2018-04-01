@@ -1,6 +1,6 @@
 package com.github.shiverawe.cheque.database.dao
 
-import com.github.shiverawe.cheque.ChequeCredentials
+import com.github.shiverawe.cheque.entities.ChequeCredentials
 import com.github.shiverawe.cheque.database.dsl.Cheque
 import com.github.shiverawe.cheque.database.dsl.ChequeItems
 import com.github.shiverawe.cheque.database.dsl.Cheques

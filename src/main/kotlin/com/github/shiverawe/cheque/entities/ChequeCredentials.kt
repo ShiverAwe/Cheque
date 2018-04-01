@@ -1,4 +1,4 @@
-package com.github.shiverawe.cheque
+package com.github.shiverawe.cheque.entities
 
 data class ChequeCredentials(
         /**

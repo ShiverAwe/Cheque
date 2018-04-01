@@ -1,6 +1,6 @@
 package com.github.shiverawe.cheque.nalogru
 
-import com.github.shiverawe.cheque.ChequeCredentials
+import com.github.shiverawe.cheque.entities.ChequeCredentials
 import org.apache.commons.io.IOUtils
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients

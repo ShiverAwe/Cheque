@@ -1,5 +1,6 @@
 package com.github.shiverawe.cheque
 
+import com.github.shiverawe.cheque.entities.ChequeCredentials
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
