@@ -4,9 +4,11 @@ import com.github.shiverawe.cheque.lib.FileConfiguration
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import java.sql.Connection
 
-abstract class H2Dao {
+abstract class H2Dao: JdbcHelpers {
 
-    private val config = FileConfiguration("database.properties")
+    //protected abstract val TAGS_TABLE: String
+
+    protected val config = FileConfiguration("database.properties")
 
     private val jdbcUrl = "jdbc:h2:./src/main/resources/h2/${config["h2.database_name"]}"
 
@@ -19,6 +21,7 @@ abstract class H2Dao {
         ds
     }
 
-    val connection: Connection
+    override val connection: Connection
         get() = h2.connection
+
 }
