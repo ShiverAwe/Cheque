@@ -21,4 +21,6 @@ interface ChequeItemDao {
      * Deletes a cheque item by id
      */
     fun delete(id: Int)
+
+    fun createTable()
 }
