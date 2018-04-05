@@ -1,7 +1,7 @@
 package com.github.shiverawe.cheque.entities
 
 class ChequeItem(
-        val id: Int,
+        val id: Int = 0,
         /**
          * Id of cheque
          */
@@ -17,5 +17,9 @@ class ChequeItem(
         /**
          * Cost of item
          */
-        val cost: Int
-)
+        val cost: Float
+){
+        override fun toString(): String {
+                return "ChequeItem(id=$id, chequeId=$chequeId, originName='$originName', name='$name', cost=$cost)"
+        }
+}
