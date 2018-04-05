@@ -6,8 +6,8 @@ import java.sql.Statement
 import java.util.*
 
 interface JdbcHelpers {
-    val connection: Connection
 
+    val connection: Connection
 
     fun <T> withConnection(action: Connection.() -> T): T {
         return connection.use { it.action() }
@@ -35,25 +35,4 @@ interface JdbcHelpers {
         return items
     }
 
-    /**
-     * This methos allows to execute SELECT query and collect results.
-     * All exceptions will not be caught.
-     * All produced resources will be closed automatically.
-     * Connection will not be closed.
-     */
-    fun <T> select(selectQuery: String, action: ResultSet.() -> T): List<T> {
-        return withConnection {
-            withStatement {
-                executeQuery(selectQuery).collect(action)
-            }
-        }
-    }
-}
-
-/**
- * This class allows to give
- */
-private class ResultSetWrapper(rs: ResultSet) : ResultSet by rs {
-    override fun next(): Boolean = true
-    override fun close() {}
 }

@@ -1,9 +1,7 @@
 package com.github.shiverawe.cheque.database.dao
 
 import com.github.shiverawe.cheque.entities.ChequeCredentials
-import com.github.shiverawe.cheque.lib.FileConfiguration
 import org.h2.jdbc.JdbcSQLException
-import java.util.*
 
 class H2ChequeDao : H2Dao(), ChequeDao {
 
@@ -35,7 +33,7 @@ class H2ChequeDao : H2Dao(), ChequeDao {
     override fun getAll(): List<ChequeCredentials> {
         return withConnection {
             withStatement {
-                select("SELECT * FROM ${TABLE_NAME}") {
+                executeQuery("SELECT * FROM ${TABLE_NAME}").collect {
                     ChequeCredentials(
                             inn = getString("inn"),
                             kkt = getString("kkt"),
@@ -62,6 +60,4 @@ class H2ChequeDao : H2Dao(), ChequeDao {
             }
         }
     }
-
-
 }
